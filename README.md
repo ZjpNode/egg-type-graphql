@@ -1,16 +1,14 @@
-# egg-graphql
+# egg-type-graphql
 
-[graphql](https://graphql.io/#/) plugin for Egg.js.
-
-> NOTE: This plugin supports TypeScript only.
+[TypeGraphQL](https://typegraphql.ml/) plugin for Egg.js.
 
 [![NPM version][npm-image]][npm-url]
 [![npm download][download-image]][download-url]
 
-[npm-image]: https://img.shields.io/npm/v/@forsigner/egg-graphql.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/@forsigner/egg-graphql
-[download-image]: https://img.shields.io/npm/dm/@forsigner/egg-graphql.svg?style=flat-square
-[download-url]: https://npmjs.org/package/@forsigner/egg-graphql
+[npm-image]: https://img.shields.io/npm/v/egg-type-graphql.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/egg-type-graphql
+[download-image]: https://img.shields.io/npm/dm/egg-type-graphql.svg?style=flat-square
+[download-url]: https://npmjs.org/package/egg-type-graphql
 
 <!--
 Description here.
@@ -19,7 +17,7 @@ Description here.
 ## Install
 
 ```bash
-$ yarn add @forsigner/egg-graphql mysql
+$ yarn add egg-type-graphql
 ```
 
 ## Usage
@@ -29,9 +27,9 @@ $ yarn add @forsigner/egg-graphql mysql
 ```ts
 // {app_root}/config/plugin.ts
 const plugin: EggPlugin = {
-  graphql: {
+  typeGraphQL: {
     enable: true,
-    package: '@forsigner/egg-graphql',
+    package: 'egg-type-graphql',
   },
 }
 ```
@@ -41,70 +39,16 @@ const plugin: EggPlugin = {
 ```ts
 // {app_root}/config/config.default.ts
 config.graphql = {
-  type: 'mysql',
-  host: 'localhost',
-  port: 3306,
-  username: 'test',
-  password: 'test',
-  database: 'test',
-  synchronize: true,
-  logging: false,
-  entities: ['app/entity/**/*.ts'],
-  migrations: ['app/migration/**/*.ts'],
-  subscribers: ['app/subscriber/**/*.ts'],
+  router: '/graphql',
+  graphiql: true,
 }
 ```
 
-### Create entity files
-
-```bash
-├── controller
-│   ├── home.ts
-│   ├── report.ts
-│   └── test-result.ts
-├── entity
-    ├── Post.ts
-    └── User.ts
-```
-
-### Entity file
-
-```ts
-// app/entity/User.ts
-
-import { Entity, PrimaryGeneratedColumn, Column } from 'graphql'
-
-@Entity()
-class User {
-  @PrimaryGeneratedColumn()
-  id: number
-
-  @Column()
-  name: string
-}
-
-export default User
-```
-
-### Invoke model
-
-```ts
-// in controller
-export default class UserController extends Controller {
-  public async index() {
-    const { ctx } = this
-    ctx.body = await ctx.model.User.find()
-  }
-}
-```
-
-## Example
-
-[example](https://github.com/forsigner/egg-graphql/tree/master/example)
+[example](https://github.com/forsigner/egg-type-graphql/tree/master/example)
 
 ## Questions & Suggestions
 
-Please open an issue [here](https://github.com/forsigner/egg-graphql/issues).
+Please open an issue [here](https://github.com/forsigner/egg-type-graphql/issues).
 
 ## License
 
