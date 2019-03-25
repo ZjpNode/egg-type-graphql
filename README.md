@@ -44,6 +44,31 @@ config.typeGraphQL = {
 }
 ```
 
+### Usage
+
+```ts
+
+// {app_root}/app/graphql/user/user.resolver.ts
+import { Resolver, Query } from 'type-graphql'
+import { EggResolver } from 'egg-type-graphql'
+import { User } from './User.type'
+
+@Resolver(() => User)
+export default class UserResolver extends EggResolver {
+  @Query(() => [User])
+  async report(): Promise<User> {
+    return await this.ctx.service.report.getUser()
+  }
+
+  @Query(() => [User])
+  async reports(): Promise<User[]> {
+    return await this.ctx.service.report.queryUsers()
+  }
+}
+
+
+````
+
 [example](https://github.com/forsigner/egg-type-graphql/tree/master/example)
 
 ## Questions & Suggestions

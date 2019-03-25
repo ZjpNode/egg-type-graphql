@@ -20,7 +20,7 @@
     "@types/fs-extra": "^5.0.5",
     "autod": "^3.0.1",
     "autod-egg": "^1.1.0",
-    "egg": "^2.20.1",
+    "egg": "^2.20.2",
     "egg-bin": "^4.12.0",
     "egg-ci": "^1.11.0",
     "egg-mock": "^3.22.1",
@@ -49,7 +49,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/forsigner/forsigner/egg-type-graphql.git"
+    "url": "git+https://github.com/forsigner/egg-type-graphql.git"
   },
   "bugs": {
     "url": "https://github.com/forsigner/egg-type-graphql/issues"
