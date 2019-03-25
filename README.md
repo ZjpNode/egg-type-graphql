@@ -38,7 +38,7 @@ const plugin: EggPlugin = {
 
 ```ts
 // {app_root}/config/config.default.ts
-config.graphql = {
+config.typeGraphQL = {
   router: '/graphql',
   graphiql: true,
 }
