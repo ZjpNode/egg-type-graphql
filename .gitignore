@@ -9,3 +9,8 @@ run/
 
 .history/
 app.js
+lib/*.d.ts
+app.d.ts
+index.js
+lib/GraphQLServer.js
+lib/egg-resolver.js
