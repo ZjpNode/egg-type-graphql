@@ -1,0 +1,57 @@
+{
+  "name": "egg-type-graphql",
+  "version": "0.1.0",
+  "description": "graphql for egg",
+  "eggPlugin": {
+    "name": "typeGraphQL"
+  },
+  "keywords": [
+    "egg",
+    "eggPlugin",
+    "egg-plugin"
+  ],
+  "dependencies": {
+    "apollo-server-koa": "^2.4.8",
+    "fs-jetpack": "^2.2.2",
+    "type-graphql": "^0.17.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^5.0.5",
+    "autod": "^3.0.1",
+    "autod-egg": "^1.1.0",
+    "egg": "^2.16.0",
+    "egg-bin": "^4.11.0",
+    "egg-ci": "^1.11.0",
+    "egg-mock": "^3.21.0",
+    "standard-version": "^5.0.1",
+    "typescript": "^3.3.3333"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "tsc": "tsc -p tsconfig.json",
+    "release": "standard-version"
+  },
+  "files": [
+    "index.js",
+    "app.js",
+    "agent.js",
+    "config",
+    "lib/*.js",
+    "app"
+  ],
+  "ci": {
+    "version": "8, 10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forsigner/forsigner/egg-type-graphql.git"
+  },
+  "bugs": {
+    "url": "https://github.com/forsigner/egg-type-graphql/issues"
+  },
+  "homepage": "https://github.com/forsigner/egg-type-graphql",
+  "author": "forsigner",
+  "license": "MIT"
+}
