@@ -16,7 +16,7 @@ export default class GraphQLServer {
 
   constructor(app: Application) {
     this.app = app
-    this.graphqlConfig = app.config.graphql
+    this.graphqlConfig = app.config.typeGraphQL
   }
 
   private loadResolvers() {
