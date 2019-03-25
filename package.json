@@ -13,18 +13,19 @@
   "dependencies": {
     "apollo-server-koa": "^2.4.8",
     "fs-jetpack": "^2.2.2",
+    "reflect-metadata": "^0.1.13",
     "type-graphql": "^0.17.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.5",
     "autod": "^3.0.1",
     "autod-egg": "^1.1.0",
-    "egg": "^2.16.0",
-    "egg-bin": "^4.11.0",
+    "egg": "^2.20.1",
+    "egg-bin": "^4.12.0",
     "egg-ci": "^1.11.0",
-    "egg-mock": "^3.21.0",
-    "standard-version": "^5.0.1",
-    "typescript": "^3.3.3333"
+    "egg-mock": "^3.22.1",
+    "standard-version": "^5.0.2",
+    "typescript": "^3.3.4000"
   },
   "engines": {
     "node": ">=8.0.0"
@@ -34,10 +35,9 @@
     "release": "standard-version"
   },
   "files": [
-    "**/*.d.ts",
+    "typings",
     "index.js",
     "app.js",
-    "agent.js",
     "config",
     "lib/*.js",
     "app"
