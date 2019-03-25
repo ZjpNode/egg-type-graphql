@@ -38,8 +38,10 @@
     "typings",
     "index.js",
     "app.js",
-    "config",
+    "config/*.js",
     "lib/*.js",
+    "lib/*.d.ts",
+    "index.d.ts",
     "app"
   ],
   "ci": {
