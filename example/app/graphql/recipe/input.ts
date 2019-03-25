@@ -1,4 +1,4 @@
-import { Recipe } from './recipe-type';
+import { Recipe } from './type';
 import { InputType, Field } from 'type-graphql';
 
 @InputType()

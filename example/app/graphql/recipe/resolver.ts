@@ -11,9 +11,9 @@ import {
 import { plainToClass } from 'class-transformer';
 import { EggResolver } from 'egg-type-graphql';
 
-import { Recipe } from './recipe-type';
-import { RecipeInput } from './recipe-input';
-import { createRecipeSamples } from './recipe-samples';
+import { Recipe } from './type';
+import { RecipeInput } from './input';
+import { createRecipeSamples } from './samples';
 
 @Resolver(of => Recipe)
 export default class RecipeResolver extends EggResolver

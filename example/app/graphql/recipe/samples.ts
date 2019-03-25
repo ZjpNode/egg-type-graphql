@@ -1,6 +1,6 @@
 import { plainToClass } from 'class-transformer';
 
-import { Recipe } from './recipe-type';
+import { Recipe } from './type';
 
 export function createRecipeSamples() {
   return plainToClass(Recipe, [
