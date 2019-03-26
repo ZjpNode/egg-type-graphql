@@ -6,10 +6,10 @@ const plugin: EggPlugin = {
   //   enable: true,
   //   package: 'egg-view-nunjucks',
   // },
-  typeGraphQL: {
-    enable: true,
-    package: 'egg-type-graphql',
-  },
+  // typeGraphQL: {
+  //   enable: true,
+  //   package: 'egg-type-graphql',
+  // },
 };
 
 export default plugin;

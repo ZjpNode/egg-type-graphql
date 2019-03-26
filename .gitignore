@@ -11,8 +11,8 @@ run/
 app.js
 lib/*.d.ts
 app.d.ts
+index.d.ts
 index.js
-lib/GraphQLServer.js
-lib/egg-resolver.js
+lib/*.js
 config/*.d.ts
 config/*.ts

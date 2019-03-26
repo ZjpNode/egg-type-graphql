@@ -1,1 +1,1 @@
-export { EggResolver } from './lib/egg-resolver'
+export { EggResolver } from './lib/EggResolver'

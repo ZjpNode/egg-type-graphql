@@ -9,7 +9,7 @@ import {
   ResolverInterface,
 } from 'type-graphql';
 import { plainToClass } from 'class-transformer';
-import { EggResolver } from 'egg-type-graphql';
+import { EggResolver } from '../../../lib/EggResolver';
 
 import { Recipe } from './type';
 import { RecipeInput } from './input';
@@ -22,8 +22,6 @@ export default class RecipeResolver extends EggResolver
 
   @Query(returns => Recipe, { nullable: true })
   async recipe(@Arg('title') title: string): Promise<Recipe | undefined> {
-    console.log('------------------------------------------------------');
-    console.log(this.config.baseDir);
     return await this.items.find(recipe => recipe.title === title);
   }
 
@@ -31,6 +29,7 @@ export default class RecipeResolver extends EggResolver
     description: 'Get all the recipes from around the world ',
   })
   async recipes(): Promise<Recipe[]> {
+    console.log(this.ctx.app.baseDir);
     return await this.items;
   }
 

@@ -3,11 +3,29 @@ import { existsSync } from 'fs'
 import { find } from 'fs-jetpack'
 import { Application } from 'egg'
 import { ApolloServer } from 'apollo-server-koa'
-import { buildSchema } from 'type-graphql'
+import { buildSchema, ResolverData } from 'type-graphql'
 
 interface GraphQLConfig {
   router: string
   graphiql: boolean
+}
+
+class CustomContainer {
+  instances: any[] = []
+  constructor() {
+    this.instances = []
+  }
+  get(someClass: any, resolverData: ResolverData) {
+    let instance = this.instances.find(it => it.type === someClass)
+    if (!instance) {
+      instance = {
+        type: someClass,
+        object: new someClass(resolverData),
+      }
+      this.instances.push(instance)
+    }
+    return instance.object
+  }
 }
 
 export default class GraphQLServer {
@@ -50,6 +68,7 @@ export default class GraphQLServer {
       resolvers,
       dateScalarMode: 'timestamp',
       emitSchemaFile: true,
+      container: () => new CustomContainer(),
     })
   }
 
