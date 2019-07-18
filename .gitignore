@@ -15,4 +15,4 @@ index.d.ts
 index.js
 lib/*.js
 config/*.d.ts
-config/*.ts
+config/*.js

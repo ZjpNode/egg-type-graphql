@@ -3,11 +3,12 @@ import { existsSync } from 'fs'
 import { find } from 'fs-jetpack'
 import { Application } from 'egg'
 import { ApolloServer } from 'apollo-server-koa'
-import { buildSchema, ResolverData } from 'type-graphql'
+import { buildSchema, ResolverData, MiddlewareFn } from 'type-graphql'
 
 interface GraphQLConfig {
   router: string
   graphiql: boolean
+  globalMiddlewares: MiddlewareFn<any>[]
 }
 
 class CustomContainer {
@@ -68,6 +69,7 @@ export default class GraphQLServer {
       resolvers,
       dateScalarMode: 'timestamp',
       emitSchemaFile: true,
+      globalMiddlewares: this.graphqlConfig.globalMiddlewares || [],
       container: () => new CustomContainer(),
     })
   }
