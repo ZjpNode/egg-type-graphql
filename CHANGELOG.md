@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.4.0](https://github.com/forsigner/egg-type-graphql/compare/v0.3.0...v0.4.0) (2019-07-18)
+
+
+### Features
+
+* support globalMiddlewares ([a249fea](https://github.com/forsigner/egg-type-graphql/commit/a249fea))
+
+
+
 # [0.3.0](https://github.com/forsigner/egg-type-graphql/compare/v0.2.2...v0.3.0) (2019-03-26)
 
 
