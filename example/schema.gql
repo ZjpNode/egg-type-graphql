@@ -3,36 +3,14 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
-type Mutation {
-  addRecipe(recipe: RecipeInput!): Recipe!
-}
-
 type Query {
-  recipe(title: String!): Recipe
-
-  """Get all the recipes from around the world """
-  recipes: [Recipe!]!
+  recipe: Recipe
 }
 
 """Object representing cooking recipe"""
 type Recipe {
-  title: String!
-  specification: String @deprecated(reason: "Use `description` field instead")
+  title: String
 
   """The recipe description with preparation info"""
   description: String
-  ratings: [Int!]!
-  creationDate: Timestamp!
-  ratingsCount(minRate: Int = 0): Int!
-  averageRating: Float
 }
-
-input RecipeInput {
-  title: String!
-  description: String
-}
-
-"""
-The javascript `Date` as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
-"""
-scalar Timestamp

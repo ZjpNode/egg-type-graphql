@@ -40,15 +40,26 @@ const plugin: EggPlugin = {
 // {app_root}/config/config.default.ts
 config.typeGraphQL = {
   router: '/graphql',
-  graphiql: true,
 }
+```
+
+### Resovler files
+
+```shell
+.
+├── controller
+│   └── home.ts
+├── resolver
+│   ├── recipe.ts
+│   └── user.ts
+└── service
+    └── Test.ts
 ```
 
 ### Usage
 
 ```ts
-
-// {app_root}/app/graphql/user/user.resolver.ts
+// {app_root}/app/resolver/user.ts
 import { Resolver, Query } from 'type-graphql'
 import { EggResolver } from 'egg-type-graphql'
 import { User } from './User.type'
@@ -65,9 +76,7 @@ export default class UserResolver extends EggResolver {
     return await this.ctx.service.report.queryUsers()
   }
 }
-
-
-````
+```
 
 [example](https://github.com/forsigner/egg-type-graphql/tree/master/example)
 

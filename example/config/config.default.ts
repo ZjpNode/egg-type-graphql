@@ -15,7 +15,6 @@ export default (appInfo: EggAppInfo) => {
 
   config.typeGraphQL = {
     router: '/graphql',
-    graphiql: true,
   };
 
   // add your special config in here

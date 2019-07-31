@@ -7,7 +7,6 @@ import { buildSchema, ResolverData, MiddlewareFn } from 'type-graphql'
 
 interface GraphQLConfig {
   router: string
-  graphiql: boolean
   globalMiddlewares: MiddlewareFn<any>[]
 }
 
@@ -40,15 +39,21 @@ export default class GraphQLServer {
 
   private loadResolvers() {
     const { baseDir } = this.app
-    const graphqlDir = join(baseDir, 'app', 'graphql')
+    const graphqlDir = join(baseDir, 'app', 'resolver')
     const resolvers: any[] = []
 
-    if (!existsSync(graphqlDir)) return []
+    if (!existsSync(graphqlDir)) {
+      this.app.logger.warn('[egg-type-graphql]', '缺少 resolver 文件')
+      return []
+    }
 
     // TODO: handle other env
-    const matching =
-      this.app.config.env === 'local' ? '*resolver.ts' : '*resolver.js'
+    const matching = this.app.config.env === 'local' ? '*.ts' : '*.js'
     const files = find(graphqlDir, { matching })
+    if (!files.length) {
+      this.app.logger.error('[egg-type-graphql]', '缺少 resolver')
+      return []
+    }
 
     try {
       for (const file of files) {
@@ -57,7 +62,7 @@ export default class GraphQLServer {
         resolvers.push(resolver)
       }
     } catch (e) {
-      this.app.logger.error('[egg-type-graphql]', JSON.stringify(e))
+      this.app.logger.error('[egg-type-graphql]', e)
     }
 
     return resolvers
@@ -65,17 +70,26 @@ export default class GraphQLServer {
 
   private async getSchema() {
     const resolvers = this.loadResolvers()
-    return await buildSchema({
-      resolvers,
-      dateScalarMode: 'timestamp',
-      emitSchemaFile: true,
-      globalMiddlewares: this.graphqlConfig.globalMiddlewares || [],
-      container: () => new CustomContainer(),
-    })
+    if (!resolvers.length) {
+      return null
+    }
+    try {
+      return await buildSchema({
+        resolvers,
+        dateScalarMode: 'timestamp',
+        emitSchemaFile: true,
+        globalMiddlewares: this.graphqlConfig.globalMiddlewares || [],
+        container: () => new CustomContainer(),
+      })
+    } catch (e) {
+      this.app.logger.error('[egg-type-graphql]', e)
+    }
   }
 
   async start() {
     const schema = await this.getSchema()
+    if (!schema) return null
+
     const server = new ApolloServer({
       schema,
       tracing: false,
