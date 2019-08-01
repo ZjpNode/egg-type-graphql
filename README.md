@@ -70,13 +70,13 @@ import { User } from './User.type'
 @Resolver(() => User)
 export default class UserResolver extends EggResolver {
   @Query(() => [User])
-  async report(): Promise<User> {
-    return await this.ctx.service.report.getUser()
+  async user(): Promise<User> {
+    return await this.ctx.service.user.getUser()
   }
 
   @Query(() => [User])
-  async reports(): Promise<User[]> {
-    return await this.ctx.service.report.queryUsers()
+  async users(): Promise<User[]> {
+    return await this.ctx.service.user.queryUser()
   }
 }
 ```
