@@ -52,6 +52,9 @@ config.typeGraphQL = {
 ├── resolver
 │   ├── recipe.ts
 │   └── user.ts
+├── input 
+│   ├── createUserInput.ts
+│   └── createRecipeInput.ts
 └── service
     └── Test.ts
 ```
