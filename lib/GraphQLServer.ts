@@ -2,12 +2,13 @@ import { join } from 'path'
 import { existsSync } from 'fs'
 import { find } from 'fs-jetpack'
 import { Application } from 'egg'
-import { ApolloServer } from 'apollo-server-koa'
+import { ApolloServer, Config } from 'apollo-server-koa'
 import { buildSchema, ResolverData, MiddlewareFn } from 'type-graphql'
 
 interface GraphQLConfig {
   router: string
-  globalMiddlewares: MiddlewareFn<any>[]
+  globalMiddlewares?: MiddlewareFn<any>[]
+  schemaDirectives?: any
 }
 
 class CustomContainer {
@@ -89,8 +90,7 @@ export default class GraphQLServer {
   async start() {
     const schema = await this.getSchema()
     if (!schema) return null
-
-    const server = new ApolloServer({
+    const apolloConfig: Config = {
       schema,
       tracing: false,
       context: ({ ctx }) => ctx,
@@ -100,7 +100,13 @@ export default class GraphQLServer {
         },
       } as any,
       introspection: true,
-    })
+    }
+    const { schemaDirectives } = this.graphqlConfig
+    if (schemaDirectives) {
+      apolloConfig.schemaDirectives = schemaDirectives
+    }
+
+    const server = new ApolloServer(apolloConfig)
     server.applyMiddleware({
       app: this.app,
       path: this.graphqlConfig.router,
