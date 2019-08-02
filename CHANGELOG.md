@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.1.0](https://github.com/forsigner/egg-type-graphql/compare/v1.0.0...v1.1.0) (2019-08-02)
+
+
+### Bug Fixes
+
+* fix readme ([54a25a7](https://github.com/forsigner/egg-type-graphql/commit/54a25a7))
+
+
+### Features
+
+* can config schemaDirectives ([700d0e4](https://github.com/forsigner/egg-type-graphql/commit/700d0e4))
+
+
+
 # [1.0.0](https://github.com/forsigner/egg-type-graphql/compare/v0.4.0...v1.0.0) (2019-07-31)
 
 
