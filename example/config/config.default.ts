@@ -15,8 +15,10 @@ export default (appInfo: EggAppInfo) => {
 
   config.typeGraphQL = {
     router: '/graphql',
+    dateScalarMode: 'isoDate',
     typeDefs: `
       directive @upperCase on FIELD_DEFINITION | FIELD
+      directive @dateFormat(format: String) on FIELD_DEFINITION | FIELD
     `,
   }
 

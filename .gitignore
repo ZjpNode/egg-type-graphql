@@ -9,11 +9,11 @@ run/
 
 .history/
 app.js
-lib/*.d.ts
+lib/**/*.d.ts
 app.d.ts
 index.d.ts
 index.js
-lib/*.js
+lib/**/*.js
 config/*.d.ts
 config/*.js
 

@@ -4,14 +4,23 @@ import { find } from 'fs-jetpack'
 import { Application } from 'egg'
 import { ApolloServer, Config } from 'apollo-server-koa'
 import { buildSchema, ResolverData, MiddlewareFn } from 'type-graphql'
-import { extendSchema, parse, GraphQLSchema } from 'graphql'
+import { extendSchema, parse, GraphQLSchema, GraphQLScalarType } from 'graphql'
 
+import { GraphQLISODateTime } from './scalars/isodate'
+import { GraphQLTimestamp } from './scalars/timestamp'
 import addDirective from './addDirective'
+
+interface scalarsMapItem {
+  type: any
+  scalar: GraphQLScalarType
+}
 
 interface GraphQLConfig {
   router: string
   globalMiddlewares?: MiddlewareFn<any>[]
-  typeDefs: string
+  scalarsMap?: scalarsMapItem[]
+  dateScalarMode?: 'isoDate' | 'timestamp'
+  typeDefs?: string
 }
 
 class CustomContainer {
@@ -44,8 +53,8 @@ export default class GraphQLServer {
   getDirectives() {
     const { baseDir } = this.app
     const directivesDir = join(baseDir, 'app', 'directive')
+    if (!existsSync(directivesDir)) return {}
 
-    // TODO: handle other env
     const matching = this.app.config.env === 'local' ? '*.ts' : '*.js'
     const files = find(directivesDir, { matching })
     return files.reduce(
@@ -105,14 +114,25 @@ export default class GraphQLServer {
   }
 
   async getSchema() {
+    const { scalarsMap = [], dateScalarMode } = this.graphqlConfig
     let schema: GraphQLSchema
     const resolvers = this.loadResolvers()
     if (!resolvers.length) return null
+    const defaultScalarMap = [
+      {
+        type: Date,
+        scalar:
+          dateScalarMode === 'timestamp'
+            ? GraphQLTimestamp
+            : GraphQLISODateTime,
+      },
+    ]
 
     try {
       schema = await buildSchema({
         resolvers,
-        dateScalarMode: 'timestamp',
+        dateScalarMode: 'isoDate',
+        scalarsMap: [...defaultScalarMap, ...scalarsMap],
         emitSchemaFile: true,
         globalMiddlewares: this.graphqlConfig.globalMiddlewares || [],
         container: () => new CustomContainer(),

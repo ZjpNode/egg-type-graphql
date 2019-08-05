@@ -13,7 +13,6 @@
   "dependencies": {
     "apollo-server-koa": "^2.8.1",
     "fs-jetpack": "^2.2.2",
-    "graphql-tools": "^4.0.5",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^0.17.4"
   },
