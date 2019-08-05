@@ -8,6 +8,7 @@ declare module 'egg' {
       router: string
       graphiql: boolean
       globalMiddlewares: MiddlewareFn<any>[]
+      typeDefs: string
     }
   }
 }

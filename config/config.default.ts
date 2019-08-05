@@ -6,6 +6,8 @@ export default () => {
   config.typeGraphQL = {
     router: '/graphql',
     globalMiddlewares: [],
+
+    // deprecated: {}
   }
 
   return config

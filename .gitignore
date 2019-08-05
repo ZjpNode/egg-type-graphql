@@ -16,3 +16,5 @@ index.js
 lib/*.js
 config/*.d.ts
 config/*.js
+
+yarn.lock

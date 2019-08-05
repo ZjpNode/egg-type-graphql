@@ -1,14 +1,17 @@
-import { join } from 'path'
+import { join, basename } from 'path'
 import { existsSync } from 'fs'
 import { find } from 'fs-jetpack'
 import { Application } from 'egg'
 import { ApolloServer, Config } from 'apollo-server-koa'
 import { buildSchema, ResolverData, MiddlewareFn } from 'type-graphql'
+import { extendSchema, parse, GraphQLSchema } from 'graphql'
+
+import addDirective from './addDirective'
 
 interface GraphQLConfig {
   router: string
   globalMiddlewares?: MiddlewareFn<any>[]
-  schemaDirectives?: any
+  typeDefs: string
 }
 
 class CustomContainer {
@@ -30,15 +33,35 @@ class CustomContainer {
 }
 
 export default class GraphQLServer {
-  private readonly app: Application
-  private graphqlConfig: GraphQLConfig
+  readonly app: Application
+  graphqlConfig: GraphQLConfig
 
   constructor(app: Application) {
     this.app = app
     this.graphqlConfig = app.config.typeGraphQL
   }
 
-  private loadResolvers() {
+  getDirectives() {
+    const { baseDir } = this.app
+    const directivesDir = join(baseDir, 'app', 'directive')
+
+    // TODO: handle other env
+    const matching = this.app.config.env === 'local' ? '*.ts' : '*.js'
+    const files = find(directivesDir, { matching })
+    return files.reduce(
+      (prev, cur) => {
+        const directivePath = join(baseDir, cur)
+        const name = basename(directivePath).replace(/(.ts)|(.js)$/, '')
+        return {
+          ...prev,
+          [name]: require(directivePath).default,
+        }
+      },
+      {} as any,
+    )
+  }
+
+  loadResolvers() {
     const { baseDir } = this.app
     const graphqlDir = join(baseDir, 'app', 'resolver')
     const resolvers: any[] = []
@@ -69,19 +92,33 @@ export default class GraphQLServer {
     return resolvers
   }
 
-  private async getSchema() {
-    const resolvers = this.loadResolvers()
-    if (!resolvers.length) {
-      return null
+  setDirective(schema: GraphQLSchema) {
+    const { typeDefs } = this.graphqlConfig
+    if (typeDefs) {
+      schema = extendSchema(schema, parse(typeDefs))
     }
+    const resolverMap = this.getDirectives()
+    if (Object.keys(resolverMap).length) {
+      return addDirective(schema, resolverMap || {})
+    }
+    return schema
+  }
+
+  async getSchema() {
+    let schema: GraphQLSchema
+    const resolvers = this.loadResolvers()
+    if (!resolvers.length) return null
+
     try {
-      return await buildSchema({
+      schema = await buildSchema({
         resolvers,
         dateScalarMode: 'timestamp',
         emitSchemaFile: true,
         globalMiddlewares: this.graphqlConfig.globalMiddlewares || [],
         container: () => new CustomContainer(),
       })
+
+      return this.setDirective(schema)
     } catch (e) {
       this.app.logger.error('[egg-type-graphql]', e)
     }
@@ -89,7 +126,9 @@ export default class GraphQLServer {
 
   async start() {
     const schema = await this.getSchema()
+
     if (!schema) return null
+
     const apolloConfig: Config = {
       schema,
       tracing: false,
@@ -99,11 +138,8 @@ export default class GraphQLServer {
           'request.credentials': 'include',
         },
       } as any,
+
       introspection: true,
-    }
-    const { schemaDirectives } = this.graphqlConfig
-    if (schemaDirectives) {
-      apolloConfig.schemaDirectives = schemaDirectives
     }
 
     const server = new ApolloServer(apolloConfig)

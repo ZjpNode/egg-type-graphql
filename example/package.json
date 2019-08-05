@@ -28,11 +28,13 @@
     "egg": "^2.6.1",
     "egg-scripts": "^2.6.0",
     "egg-type-graphql": "^0.2.2",
-    "graphql": "^14.1.1",
+    "graphql": "^14.4.2",
+    "graphql-directive": "^0.2.1",
     "typedi": "^0.8.0",
     "yarn": "^1.13.0"
   },
   "devDependencies": {
+    "@types/graphql": "^14.2.3",
     "@types/mocha": "^2.2.40",
     "@types/node": "^7.0.12",
     "@types/supertest": "^2.0.0",
