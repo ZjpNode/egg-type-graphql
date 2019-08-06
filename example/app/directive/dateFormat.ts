@@ -1,6 +1,6 @@
 import { format } from 'date-fns'
 
-export default async function dateFormat(resolve, _, args) {
+const dateFormat = async ({ resolve, args }) => {
   const value = await resolve()
 
   if (value instanceof Date) {
@@ -13,3 +13,5 @@ export default async function dateFormat(resolve, _, args) {
 
   return format(new Date(value), args.format)
 }
+
+export default dateFormat

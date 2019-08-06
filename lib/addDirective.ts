@@ -122,13 +122,13 @@ function createFieldExecutionResolver(
       context,
       info,
     ) =>
-      directiveInfo.resolver(
-        () => prevResolver(source, args, context, info),
+      directiveInfo.resolver({
+        resolve: () => prevResolver(source, args, context, info),
         source,
-        directiveInfo.args,
+        args: directiveInfo.args,
         context,
         info,
-      )
+      })
     return resolverFn
   }, createAsyncResolver(field))
 }
@@ -163,13 +163,13 @@ function createFieldResolver(
       )
 
       const value = () =>
-        directiveInfo.resolver(
-          () => prevResolver(source, args, context, info),
+        directiveInfo.resolver({
+          resolve: () => prevResolver(source, args, context, info),
           source,
-          directiveInfo.args,
+          args: directiveInfo.args,
           context,
           info,
-        )
+        })
       return () => value()
     }, asyncResolver)
 
