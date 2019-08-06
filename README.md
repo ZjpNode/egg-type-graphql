@@ -40,6 +40,7 @@ const plugin: EggPlugin = {
 // {app_root}/config/config.default.ts
 config.typeGraphQL = {
   router: '/graphql',
+  dateScalarMode: 'isoDate',
 }
 ```
 
@@ -52,7 +53,7 @@ config.typeGraphQL = {
 ├── resolver
 │   ├── recipe.ts
 │   └── user.ts
-├── input 
+├── input
 │   ├── createUserInput.ts
 │   └── createRecipeInput.ts
 └── service
@@ -82,6 +83,50 @@ export default class UserResolver extends EggResolver {
 ```
 
 [example](https://github.com/forsigner/egg-type-graphql/tree/master/example)
+
+# Use Directive
+
+In config:
+
+```ts
+config.typeGraphQL = {
+  router: '/graphql',
+  dateScalarMode: 'isoDate',
+  typeDefs: `
+      directive @upperCase on FIELD_DEFINITION | FIELD
+      directive @dateFormat(format: String) on FIELD_DEFINITION | FIELD
+    `,
+}
+```
+
+Create a Directive:
+
+```ts
+// app/directive/upperCase.ts
+export default async function upperCase({ resolve }) {
+  const value = await resolve()
+  return value.toString().toUpperCase()
+}
+```
+
+Create a Directive with args:
+
+```ts
+// app/directive/dateFormat.ts
+import { format } from 'date-fns'
+
+const dateFormat = async ({ resolve, args }) => {
+  const value = await resolve()
+
+  if (value instanceof Date) {
+    return format(value, args.format)
+  }
+
+  return format(new Date(value), args.format)
+}
+
+export default dateFormat
+```
 
 ## Questions & Suggestions
 
