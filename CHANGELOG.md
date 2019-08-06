@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.1](https://github.com/forsigner/egg-type-graphql/compare/v1.3.0...v1.3.1) (2019-08-06)
+
+
+### Bug Fixes
+
+* fix npm files ([3d87151](https://github.com/forsigner/egg-type-graphql/commit/3d87151))
+
+
+
 # [1.3.0](https://github.com/forsigner/egg-type-graphql/compare/v1.2.0...v1.3.0) (2019-08-06)
 
 
