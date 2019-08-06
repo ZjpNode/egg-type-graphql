@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.3.0](https://github.com/forsigner/egg-type-graphql/compare/v1.2.0...v1.3.0) (2019-08-06)
+
+
+### Features
+
+* export DirectiveResolveParams ([698f91e](https://github.com/forsigner/egg-type-graphql/commit/698f91e))
+* support scalars ([3c48d96](https://github.com/forsigner/egg-type-graphql/commit/3c48d96))
+* update docs ([8764432](https://github.com/forsigner/egg-type-graphql/commit/8764432))
+
+
+
 # [1.2.0](https://github.com/forsigner/egg-type-graphql/compare/v1.1.0...v1.2.0) (2019-08-05)
 
 
