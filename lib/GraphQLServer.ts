@@ -44,9 +44,11 @@ class CustomContainer {
 export default class GraphQLServer {
   readonly app: Application
   graphqlConfig: GraphQLConfig
+  koaServer: any
 
-  constructor(app: Application) {
+  constructor(app: Application, server: any) {
     this.app = app
+    this.koaServer = server
     this.graphqlConfig = app.config.typeGraphQL
   }
 
@@ -161,13 +163,15 @@ export default class GraphQLServer {
 
       introspection: true,
     }
-
     const server = new ApolloServer(apolloConfig)
+
     server.applyMiddleware({
       app: this.app,
       path: this.graphqlConfig.router,
       cors: false,
     })
+    server.installSubscriptionHandlers(this.koaServer)
+
     this.app.logger.info('[egg-type-graphql] GraphQL server started')
   }
 }

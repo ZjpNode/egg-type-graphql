@@ -8,8 +8,21 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
+type Mutation {
+  pubSubMutation(message: String): Boolean!
+  publisherMutation(message: String): Boolean!
+  pubSubMutationToDynamicTopic(message: String, topic: String!): Boolean!
+}
+
+type Notification {
+  id: ID!
+  message: String
+  date: DateTime!
+}
+
 type Query {
   recipe: Recipe
+  currentDate: DateTime!
 }
 
 """Object representing cooking recipe"""
@@ -22,6 +35,12 @@ type Recipe {
   """created date"""
   createdAt: DateTime
   user: User!
+}
+
+type Subscription {
+  normalSubscription: Notification!
+  subscriptionWithFilter: Notification!
+  subscriptionWithFilterToDynamicTopic(topic: String!): Notification!
 }
 
 """Object representing cooking recipe"""

@@ -3,8 +3,8 @@ import { Application } from 'egg'
 import GraphQLServer from './lib/GraphQLServer'
 
 export default async (app: Application) => {
-  app.beforeStart(async () => {
-    const graphQLServer = new GraphQLServer(app)
+  app.on('server', (server: any) => {
+    const graphQLServer = new GraphQLServer(app, server)
     graphQLServer.start()
   })
 }
