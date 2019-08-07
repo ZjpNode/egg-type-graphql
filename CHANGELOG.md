@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.4.0](https://github.com/forsigner/egg-type-graphql/compare/v1.3.1...v1.4.0) (2019-08-07)
+
+
+### Features
+
+* support subscriptions ([df05f8f](https://github.com/forsigner/egg-type-graphql/commit/df05f8f))
+
+
+
 ## [1.3.1](https://github.com/forsigner/egg-type-graphql/compare/v1.3.0...v1.3.1) (2019-08-06)
 
 
