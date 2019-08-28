@@ -50,12 +50,17 @@ config.typeGraphQL = {
 .
 ├── controller
 │   └── home.ts
-├── resolver
-│   ├── recipe.ts
-│   └── user.ts
-├── input
-│   ├── createUserInput.ts
-│   └── createRecipeInput.ts
+├── directive
+│   ├── dateFormat.ts
+│   └── upperCase.ts
+├── public
+├── recipe
+│   ├── resolver
+│   │   ├── recipe.resolver.ts
+│   │   └── sample.resolver.ts
+│   └── type
+│       └── notification.ts
+├── router.ts
 └── service
     └── Test.ts
 ```
