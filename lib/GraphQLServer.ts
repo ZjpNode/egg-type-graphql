@@ -17,7 +17,7 @@ interface scalarsMapItem {
 
 interface GraphQLConfig {
   router: string
-  globalMiddlewares?: MiddlewareFn<any>[]
+  globalMiddlewares?: Array<MiddlewareFn<any>>
   scalarsMap?: scalarsMapItem[]
   dateScalarMode?: 'isoDate' | 'timestamp'
   typeDefs?: string
@@ -74,17 +74,19 @@ export default class GraphQLServer {
 
   loadResolvers() {
     const { baseDir } = this.app
-    const graphqlDir = join(baseDir, 'app', 'resolver')
+    const appDir = join(baseDir, 'app')
     const resolvers: any[] = []
 
-    if (!existsSync(graphqlDir)) {
+    if (!existsSync(appDir)) {
       this.app.logger.warn('[egg-type-graphql]', '缺少 resolver 文件')
       return []
     }
 
     // TODO: handle other env
-    const matching = this.app.config.env === 'local' ? '*.ts' : '*.js'
-    const files = find(graphqlDir, { matching })
+    const matching =
+      this.app.config.env === 'local' ? '*.resolver.ts' : '*.resolver.js'
+    const files = find(appDir, { matching })
+
     if (!files.length) {
       this.app.logger.error('[egg-type-graphql]', '缺少 resolver')
       return []

@@ -1,38 +1,36 @@
-import { Resolver, Query, Field, ObjectType } from 'type-graphql'
-import { EggResolver } from '../../lib/EggResolver'
+import { Resolver, Query, Field, ObjectType } from 'type-graphql';
+import { EggResolver } from '../../../../lib/EggResolver';
 
 @ObjectType({ description: 'Object representing cooking recipe' })
 export class User {
   @Field({ nullable: true })
-  name: string
+  name: string;
 
   @Field({
     nullable: true,
   })
-  email: string
+  email: string;
 }
 
 @ObjectType({ description: 'Object representing cooking recipe' })
 export class Recipe {
   @Field({ nullable: true })
-  title: string
+  title: string;
 
   @Field({
     nullable: true,
     description: 'The recipe description with preparation info',
   })
-  description?: string
+  description?: string;
 
   @Field({
     nullable: true,
     description: 'created date',
   })
-  createdAt: Date
+  createdAt: Date;
 
   @Field(() => User)
-  user: User
-
-
+  user: User;
 }
 
 @Resolver(() => Recipe)
@@ -45,8 +43,8 @@ export default class RecipeResolver extends EggResolver {
       createdAt: new Date(),
       user: {
         name: 'forsigner',
-        email: 'hello@qq.com'
-      }
-    }
+        email: 'hello@qq.com',
+      },
+    };
   }
 }

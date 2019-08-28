@@ -1,4 +1,4 @@
-import { PubSubEngine } from 'graphql-subscriptions'
+import { PubSubEngine } from 'graphql-subscriptions';
 import {
   Resolver,
   Query,
@@ -12,16 +12,16 @@ import {
   ObjectType,
   Field,
   ID,
-} from 'type-graphql'
-import { Notification, NotificationPayload } from '../type/notification'
+} from 'type-graphql';
+import { Notification, NotificationPayload } from '../type/notification';
 
 @Resolver()
 export class SampleResolver {
-  private autoIncrement = 0
+  private autoIncrement = 0;
 
   @Query(() => Date)
   currentDate() {
-    return new Date()
+    return new Date();
   }
 
   @Mutation(() => Boolean)
@@ -29,9 +29,9 @@ export class SampleResolver {
     @PubSub() pubSub: PubSubEngine,
     @Arg('message', { nullable: true }) message?: string,
   ): Promise<boolean> {
-    const payload: NotificationPayload = { id: ++this.autoIncrement, message }
-    await pubSub.publish('NOTIFICATIONS', payload)
-    return true
+    const payload: NotificationPayload = { id: ++this.autoIncrement, message };
+    await pubSub.publish('NOTIFICATIONS', payload);
+    return true;
   }
 
   @Mutation(() => Boolean)
@@ -39,8 +39,8 @@ export class SampleResolver {
     @PubSub('NOTIFICATIONS') publish: Publisher<NotificationPayload>,
     @Arg('message', { nullable: true }) message?: string,
   ): Promise<boolean> {
-    await publish({ id: ++this.autoIncrement, message })
-    return true
+    await publish({ id: ++this.autoIncrement, message });
+    return true;
   }
 
   @Subscription({ topics: 'NOTIFICATIONS' })
@@ -49,7 +49,7 @@ export class SampleResolver {
     id,
     message,
   }: NotificationPayload): Notification {
-    return { id, message, date: new Date() }
+    return { id, message, date: new Date() };
   }
 
   @Subscription(() => Notification, {
@@ -58,8 +58,8 @@ export class SampleResolver {
       payload.id % 2 === 0,
   })
   subscriptionWithFilter(@Root() { id, message }: NotificationPayload) {
-    const newNotification: Notification = { id, message, date: new Date() }
-    return newNotification
+    const newNotification: Notification = { id, message, date: new Date() };
+    return newNotification;
   }
 
   // dynamic topic
@@ -70,9 +70,9 @@ export class SampleResolver {
     @Arg('topic') topic: string,
     @Arg('message', { nullable: true }) message?: string,
   ): Promise<boolean> {
-    const payload: NotificationPayload = { id: ++this.autoIncrement, message }
-    await pubSub.publish(topic, payload)
-    return true
+    const payload: NotificationPayload = { id: ++this.autoIncrement, message };
+    await pubSub.publish(topic, payload);
+    return true;
   }
 
   @Subscription({
@@ -82,7 +82,7 @@ export class SampleResolver {
     @Arg('topic') topic: string,
     @Root() { id, message }: NotificationPayload,
   ): Notification {
-    console.log('topic:', topic)
-    return { id, message, date: new Date() }
+    console.log('topic:', topic);
+    return { id, message, date: new Date() };
   }
 }
