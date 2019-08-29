@@ -54,8 +54,7 @@ export class SampleResolver {
 
   @Subscription(() => Notification, {
     topics: 'NOTIFICATIONS',
-    filter: ({ payload }: ResolverFilterData<NotificationPayload>) =>
-      payload.id % 2 === 0,
+    filter: ({ payload }: ResolverFilterData<NotificationPayload>) => payload.id % 2 === 0,
   })
   subscriptionWithFilter(@Root() { id, message }: NotificationPayload) {
     const newNotification: Notification = { id, message, date: new Date() };

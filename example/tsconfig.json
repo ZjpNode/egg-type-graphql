@@ -1,6 +1,8 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./",
     "target": "es2017",
     "module": "commonjs",
     "strict": true,
@@ -21,11 +23,10 @@
     "skipDefaultLibCheck": true,
     "inlineSourceMap": true,
     "esModuleInterop": true,
-    "importHelpers": true
+    "importHelpers": true,
+    "paths": {
+      "@entity/*": ["app/entity/*"]
+    }
   },
-  "exclude": [
-    "app/public",
-    "app/views",
-    "node_modules*"
-  ]
+  "exclude": ["app/public", "app/views", "node_modules*"]
 }

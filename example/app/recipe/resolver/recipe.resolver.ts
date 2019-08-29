@@ -1,5 +1,5 @@
 import { Resolver, Query, Field, ObjectType } from 'type-graphql';
-import { EggResolver } from '../../../../lib/EggResolver';
+import { EggResolver } from '../../../lib/EggResolver';
 
 @ObjectType({ description: 'Object representing cooking recipe' })
 export class User {
@@ -34,7 +34,7 @@ export class Recipe {
 }
 
 @Resolver(() => Recipe)
-export default class RecipeResolver extends EggResolver {
+export class RecipeResolver extends EggResolver {
   @Query(() => Recipe, { nullable: true })
   async recipe(): Promise<Recipe> {
     return {

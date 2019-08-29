@@ -1,6 +1,7 @@
 import { join, basename } from 'path'
 import { existsSync } from 'fs'
 import { find } from 'fs-jetpack'
+
 import { Application } from 'egg'
 import { ApolloServer, Config } from 'apollo-server-koa'
 import { buildSchema, ResolverData, MiddlewareFn } from 'type-graphql'
@@ -10,7 +11,7 @@ import { GraphQLISODateTime } from './scalars/isodate'
 import { GraphQLTimestamp } from './scalars/timestamp'
 import addDirective from './addDirective'
 
-interface scalarsMapItem {
+interface ScalarsMapItem {
   type: any
   scalar: GraphQLScalarType
 }
@@ -18,7 +19,7 @@ interface scalarsMapItem {
 interface GraphQLConfig {
   router: string
   globalMiddlewares?: Array<MiddlewareFn<any>>
-  scalarsMap?: scalarsMapItem[]
+  scalarsMap?: ScalarsMapItem[]
   dateScalarMode?: 'isoDate' | 'timestamp'
   typeDefs?: string
 }
@@ -72,10 +73,30 @@ export default class GraphQLServer {
     )
   }
 
+  getResolverClassFromFile(resolverPath: string) {
+    const EGG_RESOLVER = 'EggResolver'
+    const resolverModule = require(resolverPath)
+    const resolvers = Object.keys(resolverModule).reduce(
+      (result, cur) => {
+        // TODO: EggResolver 可能会被别名
+
+        if (resolverModule[cur].toString().includes(EGG_RESOLVER)) {
+          if (!result.includes(resolverModule[cur])) {
+            result.push(resolverModule[cur])
+          }
+        }
+
+        return result
+      },
+      [] as any[],
+    )
+    return resolvers
+  }
+
   loadResolvers() {
     const { baseDir } = this.app
     const appDir = join(baseDir, 'app')
-    const resolvers: any[] = []
+    let resolvers: any[] = []
 
     if (!existsSync(appDir)) {
       this.app.logger.warn('[egg-type-graphql]', '缺少 resolver 文件')
@@ -83,8 +104,7 @@ export default class GraphQLServer {
     }
 
     // TODO: handle other env
-    const matching =
-      this.app.config.env === 'local' ? '*.resolver.ts' : '*.resolver.js'
+    const matching = this.app.config.env === 'local' ? '*.resolver.ts' : '*.resolver.js'
     const files = find(appDir, { matching })
 
     if (!files.length) {
@@ -95,8 +115,14 @@ export default class GraphQLServer {
     try {
       for (const file of files) {
         const resolverPath = join(baseDir, file)
-        const resolver = require(resolverPath).default
-        resolvers.push(resolver)
+        const resolversFromFile = this.getResolverClassFromFile(resolverPath)
+        if (!resolversFromFile.length) {
+          this.app.logger.error(
+            '[egg-type-graphql]',
+            `${file} 文件必须存在至少一个继承于 EggResolver 的 class`,
+          )
+        }
+        resolvers = [...resolvers, ...resolversFromFile]
       }
     } catch (e) {
       this.app.logger.error('[egg-type-graphql]', e)
@@ -125,10 +151,7 @@ export default class GraphQLServer {
     const defaultScalarMap = [
       {
         type: Date,
-        scalar:
-          dateScalarMode === 'timestamp'
-            ? GraphQLTimestamp
-            : GraphQLISODateTime,
+        scalar: dateScalarMode === 'timestamp' ? GraphQLTimestamp : GraphQLISODateTime,
       },
     ]
 
