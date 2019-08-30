@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.7.0](https://github.com/forsigner/egg-type-graphql/compare/v1.6.0...v1.7.0) (2019-08-30)
+
+
+### Features
+
+* support DI ([5d4ff96](https://github.com/forsigner/egg-type-graphql/commit/5d4ff96))
+
+
+
 # [1.6.0](https://github.com/forsigner/egg-type-graphql/compare/v1.5.0...v1.6.0) (2019-08-29)
 
 
