@@ -1,4 +1,3 @@
-export { EggResolver } from './lib/EggResolver'
 import { GraphQLResolveInfo } from 'graphql'
 
 export interface DirectiveResolveParams<

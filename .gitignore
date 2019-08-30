@@ -18,3 +18,4 @@ config/*.d.ts
 config/*.js
 
 yarn.lock
+package-lock.json
