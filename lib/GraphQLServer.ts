@@ -143,7 +143,7 @@ export default class GraphQLServer {
         dateScalarMode: 'isoDate',
         scalarsMap: [ ...defaultScalarMap, ...scalarsMap ],
         emitSchemaFile: true,
-        validate: this.graphqlConfig.validate || true,
+        validate: this.graphqlConfig.validate,
         globalMiddlewares: this.graphqlConfig.globalMiddlewares || [],
         container: Container,
       });
