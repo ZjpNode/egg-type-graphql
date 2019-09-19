@@ -5,6 +5,7 @@ export default () => {
 
   config.typeGraphQL = {
     router: '/graphql',
+    validate: true,
     globalMiddlewares: [],
   }
 

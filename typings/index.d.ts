@@ -12,6 +12,7 @@ declare module 'egg' {
   interface EggAppConfig {
     typeGraphQL: {
       router: string
+      validate?: boolean;
       globalMiddlewares?: MiddlewareFn<any>[]
       scalarsMap?: scalarsMapItem[]
       dateScalarMode?: 'isoDate' | 'timestamp'
