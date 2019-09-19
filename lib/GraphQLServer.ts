@@ -18,6 +18,7 @@ interface ScalarsMapItem {
 
 interface GraphQLConfig {
   router: string
+  validate?: boolean
   globalMiddlewares?: Array<MiddlewareFn<any>>
   scalarsMap?: ScalarsMapItem[]
   dateScalarMode?: 'isoDate' | 'timestamp'
@@ -161,6 +162,7 @@ export default class GraphQLServer {
         dateScalarMode: 'isoDate',
         scalarsMap: [...defaultScalarMap, ...scalarsMap],
         emitSchemaFile: true,
+        validate: this.graphqlConfig.validate || true,
         globalMiddlewares: this.graphqlConfig.globalMiddlewares || [],
         container: () => new CustomContainer(),
       })
