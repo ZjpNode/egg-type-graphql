@@ -68,21 +68,41 @@ config.typeGraphQL = {
 ### Usage
 
 ```ts
+// service
+
+import { Service } from 'typedi';
+
+@Service()
+export class UserService {
+  getUser() {
+    // TODO
+  }
+
+  queryUser() {
+    // TODO
+  }
+}
+
+```
+
+
+```ts
 // {app_root}/app/resolver/user.ts
 import { Resolver, Query } from 'type-graphql'
-import { EggResolver } from 'egg-type-graphql'
 import { User } from './User.type'
 
 @Resolver(() => User)
-export default class UserResolver extends EggResolver {
+export class UserResolver {
+  constructor(private userService: UserService) {}
+
   @Query(() => [User])
   async user(): Promise<User> {
-    return await this.ctx.service.user.getUser()
+    return await this.userService.getUser()
   }
 
   @Query(() => [User])
   async users(): Promise<User[]> {
-    return await this.ctx.service.user.queryUser()
+    return await this.userService.queryUser()
   }
 }
 ```

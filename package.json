@@ -11,10 +11,11 @@
     "egg-plugin"
   ],
   "dependencies": {
-    "apollo-server-koa": "^2.8.1",
+    "apollo-server-koa": "^2.9.1",
     "fs-jetpack": "^2.2.2",
     "reflect-metadata": "^0.1.13",
-    "type-graphql": "^0.17.4"
+    "type-graphql": "^0.17.5",
+    "typedi": "^0.8.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.5",
