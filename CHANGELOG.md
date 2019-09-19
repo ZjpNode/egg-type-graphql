@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.8.0](https://github.com/forsigner/egg-type-graphql/compare/v1.6.0...v1.8.0) (2019-09-19)
+
+
+### Bug Fixes
+
+* fix conflict ([145bd96](https://github.com/forsigner/egg-type-graphql/commit/145bd96))
+
+
+### Features
+
+* can config automatic validation ([7a91f34](https://github.com/forsigner/egg-type-graphql/commit/7a91f34))
+
+
+
 # [1.7.0](https://github.com/forsigner/egg-type-graphql/compare/v1.6.0...v1.7.0) (2019-08-30)
 
 
