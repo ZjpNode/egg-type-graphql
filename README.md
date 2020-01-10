@@ -17,7 +17,7 @@ Description here.
 ## Install
 
 ```bash
-$ yarn add egg-type-graphql
+$ npm i egg-type-graphql
 ```
 
 ## Usage
