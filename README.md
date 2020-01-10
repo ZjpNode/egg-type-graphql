@@ -1,14 +1,15 @@
 # egg-type-graphql
 
 [TypeGraphQL](https://typegraphql.ml/) plugin for Egg.js.
-<!-- 
-[![NPM version][npm-image]][npm-url]
-[![npm download][download-image]][download-url]
 
-[npm-image]: https://img.shields.io/npm/v/egg-type-graphql.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/egg-type-graphql
-[download-image]: https://img.shields.io/npm/dm/egg-type-graphql.svg?style=flat-square
-[download-url]: https://npmjs.org/package/egg-type-graphql 
+<!-- 
+  [![NPM version][npm-image]][npm-url]
+  [![npm download][download-image]][download-url]
+
+  [npm-image]: https://img.shields.io/npm/v/egg-type-graphql.svg?style=flat-square
+  [npm-url]: https://npmjs.org/package/egg-type-graphql
+  [download-image]: https://img.shields.io/npm/dm/egg-type-graphql.svg?style=flat-square
+  [download-url]: https://npmjs.org/package/egg-type-graphql 
 -->
 
 <!--
@@ -40,6 +41,7 @@ const plugin: EggPlugin = {
 ```ts
 // {app_root}/config/config.default.ts
 config.typeGraphQL = {
+  dirPath: 'graphql'
   router: '/graphql',
   dateScalarMode: 'isoDate',
 }
@@ -48,19 +50,23 @@ config.typeGraphQL = {
 ### Resovler files
 
 ```shell
-.
 ├── controller
 │   └── home.ts
-├── directive
-│   ├── dateFormat.ts
-│   └── upperCase.ts
-├── public
-├── recipe
-│   ├── resolver
-│   │   ├── recipe.resolver.ts
-│   │   └── sample.resolver.ts
-│   └── type
-│       └── notification.ts
+├── {dirPath}(graphql)
+│   ├── app
+│   │   │── recipe
+│   │   │   │── recipe.resolver.ts
+│   │   │   │── recipe.service.ts
+│   │   │   └── recipe.type.ts
+│   │   └── sample
+│   │       │── sample.resolver.ts
+│   │       │── sample.service.ts
+│   │       └── sample.type.ts
+│   ├── decorators
+│   ├── directive
+│   │   ├── dateFormat.ts
+│   │   └── upperCase.ts
+│   └── middle_wares
 ├── router.ts
 └── service
     └── Test.ts
@@ -88,7 +94,7 @@ export class UserService {
 
 
 ```ts
-// {app_root}/app/resolver/user.ts
+// {app_root}/app/{dirPath}/app/resolver/user.ts
 import { Resolver, Query } from 'type-graphql'
 import { User } from './User.type'
 
@@ -116,6 +122,7 @@ In config:
 
 ```ts
 config.typeGraphQL = {
+  dirPath: 'graphql',
   router: '/graphql',
   dateScalarMode: 'isoDate',
   typeDefs: `
@@ -128,7 +135,7 @@ config.typeGraphQL = {
 Create a Directive:
 
 ```ts
-// app/directive/upperCase.ts
+// {app_root}/app/{dirPath}/directive/upperCase.ts
 export default async function upperCase({ resolve }) {
   const value = await resolve()
   return value.toString().toUpperCase()
@@ -138,7 +145,7 @@ export default async function upperCase({ resolve }) {
 Create a Directive with args:
 
 ```ts
-// app/directive/dateFormat.ts
+// {app_root}/app/{dirPath}/directive/dateFormat.ts
 import { format } from 'date-fns'
 
 const dateFormat = async ({ resolve, args }) => {
