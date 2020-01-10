@@ -19,6 +19,7 @@ interface ScalarsMapItem {
 
 interface GraphQLConfig {
   router: string;
+  dirPath: string;
   validate?: boolean
   globalMiddlewares?: Array<MiddlewareFn<any>>;
   scalarsMap?: ScalarsMapItem[];
@@ -43,7 +44,7 @@ export default class GraphQLServer {
 
   getDirectives() {
     const { baseDir } = this.app;
-    const directivesDir = join(baseDir, 'app', 'directive');
+    const directivesDir = join(baseDir, 'app', this.graphqlConfig.dirPath ,'directive');
     if (!existsSync(directivesDir)) return {};
 
     const matching = this.app.config.env === 'local' ? '*.ts' : '*.js';
