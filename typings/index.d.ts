@@ -11,6 +11,7 @@ interface scalarsMapItem {
 declare module 'egg' {
   interface EggAppConfig {
     typeGraphQL: {
+      dirPath:string
       router: string
       validate?: boolean;
       globalMiddlewares?: MiddlewareFn<any>[]

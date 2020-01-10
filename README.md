@@ -1,14 +1,15 @@
 # egg-type-graphql
 
 [TypeGraphQL](https://typegraphql.ml/) plugin for Egg.js.
-
+<!-- 
 [![NPM version][npm-image]][npm-url]
 [![npm download][download-image]][download-url]
 
 [npm-image]: https://img.shields.io/npm/v/egg-type-graphql.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/egg-type-graphql
 [download-image]: https://img.shields.io/npm/dm/egg-type-graphql.svg?style=flat-square
-[download-url]: https://npmjs.org/package/egg-type-graphql
+[download-url]: https://npmjs.org/package/egg-type-graphql 
+-->
 
 <!--
 Description here.
@@ -107,7 +108,7 @@ export class UserResolver {
 }
 ```
 
-[example](https://github.com/forsigner/egg-type-graphql/tree/master/example)
+[example](http://192.168.100.3:8080/HX/egg-type-graphql/tree/master/example)
 
 # Use Directive
 
@@ -155,7 +156,7 @@ export default dateFormat
 
 ## Questions & Suggestions
 
-Please open an issue [here](https://github.com/forsigner/egg-type-graphql/issues).
+Please open an issue [here](http://192.168.100.3:8080/HX/egg-type-graphql/issues).
 
 ## License
 
