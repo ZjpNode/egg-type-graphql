@@ -163,7 +163,7 @@ export default dateFormat
 
 ## Questions & Suggestions
 
-Please open an issue [here](http://192.168.100.3:8080/HX/egg-type-graphql/issues).
+Please open an issue [here](https://github.com/ZjpNode/egg-type-graphql/issues).
 
 ## License
 
