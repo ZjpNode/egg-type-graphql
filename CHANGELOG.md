@@ -2,16 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [1.8.4](http://192.168.100.3:8080/HX/egg-type-graphql/compare/v1.8.3...v1.8.4) (2020-01-10)
+## [1.8.4](https://github.com/ZjpNode/egg-type-graphql/compare/v1.8.3...v1.8.4) (2020-01-10)
 
 
 
-## [1.8.3](http://192.168.100.3:8080/HX/egg-type-graphql/compare/v1.8.0...v1.8.3) (2020-01-10)
+## [1.8.3](https://github.com/ZjpNode/egg-type-graphql/compare/v1.8.0...v1.8.3) (2020-01-10)
 
 
 ### Bug Fixes
 
-* remove wrong default config of validation ([6e6d982](http://192.168.100.3:8080/HX/egg-type-graphql/commits/6e6d982973f7790c68a966f592b8c0f1ab66ab0f))
+* remove wrong default config of validation ([6e6d982](https://github.com/ZjpNode/egg-type-graphql/commits/6e6d982973f7790c68a966f592b8c0f1ab66ab0f))
 
 
 
