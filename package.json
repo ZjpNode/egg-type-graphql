@@ -51,12 +51,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+http://192.168.100.3:8080/HX/egg-type-graphql.git"
+    "url": "git+https://github.com/ZjpNode/egg-type-graphql.git"
   },
   "bugs": {
-    "url": "http://192.168.100.3:8080/HX/egg-type-graphql/issues"
+    "url": "https://github.com/ZjpNode/egg-type-graphql/issues"
   },
-  "homepage": "http://192.168.100.3:8080/HX/egg-type-graphql",
+  "homepage": "https://github.com/ZjpNode/egg-type-graphql",
   "author": "forsigner",
   "license": "MIT"
 }
