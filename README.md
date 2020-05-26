@@ -114,7 +114,7 @@ export class UserResolver {
 }
 ```
 
-[example](http://192.168.100.3:8080/HX/egg-type-graphql/tree/master/example)
+[example](https://github.com/ZjpNode/egg-type-graphql/tree/master/example)
 
 # Use Directive
 
