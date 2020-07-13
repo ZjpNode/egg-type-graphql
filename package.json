@@ -26,7 +26,7 @@
     "egg-bin": "^4.12.0",
     "egg-ci": "^1.11.0",
     "egg-mock": "^3.22.1",
-    "standard-version": "^5.0.2",
+    "standard-version": "^8.0.1",
     "typescript": "^3.3.4000"
   },
   "engines": {
